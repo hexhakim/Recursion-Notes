@@ -31,7 +31,7 @@ $$
 \end{aligned}
 $$
 
-So, to calculate $n!$, we have to calcualte $(n-1)!$. This is what we can call dividing the problem into smaller sub-problems. These are the cases when we need to use recursive functions.
+**So, to calculate $n!$, we have to calcualte $(n-1)!$. This is what we can call dividing the problem into smaller sub-problems. These are the cases when we need to use recursive functions.**
 
 In programming, we see this solution in a reverse way.
 
@@ -59,16 +59,20 @@ $$
 
 ## The Recursion
 
-Therefore, we can imagine a function named `fact`. We call it when we need to calculate the factorial of a number. That's the only thing we know! And, yeah, we need to know another thing. That is the base case. So, when we are trying to access `fact(1)` it should return $1$.
+Therefore, we can imagine a function named `fact(n)`. We call it when we need to calculate the factorial of a number, $n$. That's the only thing we know! And, yeah, we need to know another thing. That is the base case. So, when we are trying to access `fact(1)`, it should return $1$.
 
 With this idea in mind, let's see the following function,
 
 ```cpp
-int fact(int n) {
-    if (n <= 1) return 1;
-    return n * fact(n - 1);
+long long fact(int n) {
+    // base case first
+    if (n == 1 || n == 0) return 1; // fact(1) should return 1
+    
+    return n * fact(n - 1); // fact(n) = n * fact(n - 1)
 }
 ```
+
+>> **Food for thought**: Why we checked if `n == 0` or not?
 
 It is the potential redefinition of the iterative method to calculate the factorial of a number, which is something like below,
 
@@ -98,3 +102,23 @@ factorial(4)
                                        |
                                        +---> 1 (Base case)
 ```
+
+After getting the value from the base case, the process of backtracking will start to calculate `fact(4)`.
+
+```scss
+                                       <---- 1 (Base case)
+                                       |
+                           <---- 2 * 1
+                           |
+               <---- 3 * 2
+               |
+   <---- 4 * 6
+   |
+factorial(4) := 24
+```
+
+I hope this gives a basic idea about recursion.
+
+***
+
+Drafted on October 1, 2024 by Md Azizul Hakim
